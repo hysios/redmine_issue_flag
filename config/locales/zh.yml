@@ -1,0 +1,15 @@
+zh:
+  issue_flag: "积分"
+  field_flag: "积分"
+  field_issue_flag: "积分"
+  label_flag: "积分:"
+  award: " 奖励"
+  punish: "惩罚"
+  award_flag_success: "奖励积分成功"
+  label_start: "开始"
+  label_end: "结束"
+  field_filter: "过滤"
+  field_flag_close: '积分关闭'
+  label_task_count: "任务总数"
+  label_task_complete: "完成任务"
+  label_award: "奖励积分"

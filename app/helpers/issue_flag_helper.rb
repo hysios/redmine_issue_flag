@@ -1,0 +1,2 @@
+module IssueFlagHelper
+end

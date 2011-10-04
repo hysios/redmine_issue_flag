@@ -1,0 +1,38 @@
+
+<% form_tag :action => :index do -%>
+<p>
+<%= label :data_range, l(:label_start) %>
+<%= select_datetime  @start, :prefix => 'start'%>
+</p>
+<p>
+<%= label :date_range, l(:label_end) %>
+
+<%= select_datetime  @end, :prefix => 'end'%>
+<%= submit_tag l(:field_filter) %>
+<% end %>
+
+<h1><%= @project.name %></h1>
+<table>
+<tr>
+	<td><%= l(:field_name) %></td>
+	<td><%= l(:label_task_count) %></td>
+	<td><%= l(:label_task_complete) %></td>
+	<td><%= l(:label_total) %></td>
+	<td><%= l(:label_award) %></td>
+</tr>	
+<% if !@issue_flags.blank? %>
+  <% for flag in @issue_flags %>
+<tr>
+	<td><%= flag.name %></td>
+	<td><%= flag.count %></td>
+	<td><%= flag.complete %></td>
+	<td><%= flag.total %></td>
+	<td><%= flag.award %></td>
+</tr>    
+  <% end %>
+<% else %>
+  
+<% end %>
+
+
+</table>
