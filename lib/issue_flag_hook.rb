@@ -23,7 +23,7 @@ class IssueFlagHook < Redmine::Hook::ViewListener
       @template = context[:request].env["action_controller.rescue.response"].template
 
       temp =  @template.content_tag :div, :class => 'contextual' do
-        if context[:issue].issue_flag.status != 0
+        if context[:issue].issue_flag && context[:issue].issue_flag.status != 0
           output = @template.link_to(l(:award),{:action => 'award'}, :id => 'award_button') + " "
           output.concat(@template.link_to(l(:punish), {:action => 'punish'}, :id =>'punish_button'))
           @template.content_for :header_tags do 
@@ -43,6 +43,8 @@ class IssueFlagHook < Redmine::Hook::ViewListener
             JAVASCRIPT
           })
           output
+        elsif !context[:issue].issue_flag
+          output = @template.content_tag(:span, l(:field_flag_nohaving), :style => 'color:blue')
         else
           output = @template.content_tag(:span, l(:field_flag_close), :style => 'color:red')
         end

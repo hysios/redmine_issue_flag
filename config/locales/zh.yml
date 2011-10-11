@@ -10,6 +10,7 @@ zh:
   label_end: "结束"
   field_filter: "过滤"
   field_flag_close: '积分关闭'
+  field_flag_nohaving: "未设置"
   label_task_count: "任务总数"
   label_task_complete: "完成任务"
   label_award: "奖励积分"
