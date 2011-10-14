@@ -13,6 +13,7 @@ module RedmineIssueFlag
       base.class_eval do
         unloadable # Send unloadable so it will not be unloaded in development
         has_one :issue_flag
+        has_one :member_flag
         
         attr_accessor :flag
         

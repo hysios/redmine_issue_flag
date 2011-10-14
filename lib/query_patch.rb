@@ -3,6 +3,13 @@ require_dependency 'query'
 # Patches Redmine's Queries dynamically, adding the Deliverable
 # to the available query columns
 module RedmineIssueFlag
+  module QueryColumnPatch
+
+    def value(issue)
+      "*" + issue.send(name)
+    end
+  end
+  
   module QueryPatch
     def self.included(base) # :nodoc:
       base.extend(ClassMethods)
@@ -12,7 +19,16 @@ module RedmineIssueFlag
       # Same as typing in the class 
       base.class_eval do
         unloadable # Send unloadable so it will not be unloaded in development
-        base.available_columns << (QueryColumn.new(:flag, :sortable => "#{IssueFlag.table_name}.flag"))
+        flag_column = QueryColumn.new(:flag, :sortable => "#{IssueFlag.table_name}.flag")
+        def flag_column.value(issue) 
+          value = issue.send(name).to_s || ""
+          if !issue.member_flag.nil?
+            "+ " + value
+          else
+            value
+          end
+        end
+        base.available_columns << (flag_column)
       
         alias_method_chain :available_filters, :flags
       end
